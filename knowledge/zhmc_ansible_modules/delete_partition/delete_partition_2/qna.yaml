@@ -1,0 +1,19 @@
+task_description: 'Teach the model how to write an ansible script using ibm.ibm_zhmc ansible collection to delete a partition'
+created_by: djoeantony
+domain: ansible
+seed_examples:
+- question: 'Using the ibm.ibm_zhmc ansible collection, write a script to delete partition with the name joe-part-1 on the hmc 9.152.150.122 and cpc P0000A28'
+  answer: '\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"9.152.150.122\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"P0000A28\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, generate an ansible script to delete a partition on the hmc 9.152.150.122 and cpc P0000A28, with the name joe-part-1'
+  answer: '\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"9.152.150.122\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"P0000A28\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, write an ansible playbook to delete partition with the name joe-part-1 on the hmc 9.152.150.122 and cpc P0000A28'
+  answer: '\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"9.152.150.122\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"P0000A28\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, write an ansible playbook to delete partition joe-part-1 on the hmc 9.152.150.122 and cpc P0000A28'
+  answer: '\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"9.152.150.122\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"P0000A28\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+
+document:
+  repo: https://github.com/abhi1092/ibm-history-documents
+  commit: 1dc85d0fc19e21ad8adbf5f98bd8aa1e31257d0a
+  patterns:
+    - ibm*.md
+    - origins_of_ibm*.md

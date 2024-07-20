@@ -1,0 +1,19 @@
+task_description: 'Teach the model how to write an ansible script using ibm.ibm_zhmc ansible collection to create partition'
+created_by: kavin
+domain: ansible
+seed_examples:
+- question: 'Using the ibm.ibm_zhmc ansible collection, Create partition with maximum_memory as 1024, minimum_memory as 512, name as "Zaas Demo"'
+  answer: '- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: ZaaS Demo\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} exists and is stopped\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: stopped\n        properties:\n          description: \"This is partition {{ partition_name }}\"\n          cp_processors: 2\n          initial_memory: 512\n          maximum_memory: 1024\n          minimum_cp_processing_weight: 50\n          maximum_cp_processing_weight: 800\n          initial_cp_processing_weight: 200\n      register: result\n\n    - name: Print the result\n      debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, Create partition using ansible module set name as "Zaas Demo", with cp_processors as 20, fetch credentials and machine information from vault.'
+  answer: '- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: ZaaS Demo\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} exists and is stopped\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: stopped\n        properties:\n          description: \"This is partition {{ partition_name }}\"\n          cp_processors: 20\n          initial_memory: 1024\n          maximum_memory: 1024\n          minimum_cp_processing_weight: 50\n          maximum_cp_processing_weight: 800\n          initial_cp_processing_weight: 200\n      register: result\n\n    - name: Print the result\n      debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, Create partition using ansible module set name as "kavin", fetch credentials and machine information from vault. Once created, print the partition'
+  answer: '- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: kavin\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} exists and is stopped\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: stopped\n        properties:\n          description: \"This is partition {{ partition_name }}\"\n          cp_processors: 2\n          initial_memory: 1024\n          maximum_memory: 1024\n          minimum_cp_processing_weight: 50\n          maximum_cp_processing_weight: 800\n          initial_cp_processing_weight: 200\n      register: result\n\n    - name: Print the result\n      debug:\n        var: result'
+
+document:
+  repo: https://github.com/abhi1092/ibm-history-documents
+  commit: 1dc85d0fc19e21ad8adbf5f98bd8aa1e31257d0a
+  patterns:
+    - ibm*.md
+    - origins_of_ibm*.md
+
+
