@@ -1,0 +1,21 @@
+task_description: 'Teach the model how to write an ansible script using ibm.ibm_zhmc ansible collection to delete a partition'
+created_by: djoeantony
+domain: ansible
+seed_examples:
+- question: 'Using the ibm.ibm_zhmc ansible collection, write a script to delete partition with the name joe-part-1'
+  answer: '# The following script is based on the ibm.ibm_zhmc ansible collection that is available in ansible-galaxy\n\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, write a playbook to delete partition with the name joe-part-1'
+  answer: '# The following script is based on the ibm.ibm_zhmc ansible collection that is available in ansible-galaxy\n\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, write an ansible playbook to delete partition with the name joe-part-1'
+  answer: '# The following script is based on the ibm.ibm_zhmc ansible collection that is available in ansible-galaxy\n\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+- question: 'Using the ibm.ibm_zhmc ansible collection, write an ansible playbook to delete partition joe-part-1'
+  answer: '# The following script is based on the ibm.ibm_zhmc ansible collection that is available in ansible-galaxy\n\n- hosts:\n    - my_hmc_list\n  vars_files:\n    - vault.yml\n  vars:\n    partition_name: joe-part-1\n  collections:\n    - ibm.ibm_zhmc\n  tasks:\n\n    - name: \"Ensure partition {{ partition_name }} does not exist\"\n      delegate_to: localhost\n      zhmc_partition:\n        hmc_host: \"{{ ansible_host }}\"\n        hmc_auth: \"{{ hmc_auth[inventory_hostname] }}\"\n        cpc_name: \"{{ cpc_name }}\"\n        name: \"{{ partition_name }}\"\n        state: absent\n      register: result\n\n    - name: Print the result\n      ansible.builtin.debug:\n        var: result'
+
+document:
+  repo: https://github.com/abhi1092/ibm-history-documents
+  commit: 1dc85d0fc19e21ad8adbf5f98bd8aa1e31257d0a
+  patterns:
+    - ibm*.md
+    - origins_of_ibm*.md
+
+
